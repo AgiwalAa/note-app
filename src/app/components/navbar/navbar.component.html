@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand navbar-dark bg-secondary">
+    <a class="sidebar-toggle text-light mr-3"><i class="fa fa-bars"></i></a>
+
+    <a class="navbar-brand" href="#"><i class="fa fa-code-branch"></i></a>
+
+    <div class="navbar-collapse collapse">
+        <ul class="navbar-nav ml-auto">
+                <form class="form-inline mt-2 mt-md-0" id="filter">
+                        <input class="form-control mr-sm-2" type="text" name="notesList" [(ngModel)]="searchKey" placeholder="Search" aria-label="Search">
+                      </form>
+        </ul>
+    </div>
+</nav>
+
+<div class="d-flex align-items-stretch">
+    <div class="sidebar bg-light">
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-info" (click)="listClick(note)" [ngClass]="{'active': note === selectedNote}"  *ngFor="let note of notesList |filter  :searchKey">
+                    <i class="fa fa-fw fa-link"></i> <span class="text-muted float-right"> {{note.timeStamp | date:'EE  h:mm'}}</span><br/> {{ note.description }}
+            </li>
+        </ul>
+    </div>
+
+    <div class="content p-4">
+        <h1 class="display-5 mb-4 text-primary" >Save your notes!</h1>
+
+        <app-notes-detail [note]="selectedNote"></app-notes-detail>
+    </div>
+</div>
